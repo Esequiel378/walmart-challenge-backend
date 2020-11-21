@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: ./compose/local/api/Dockerfile
+    container_name: api
+    command: /start
+    env_file: ./.envs/.local/.api
+    volumes:
+      - ./app:/app
+    ports:
+      - "80:80"
+
+
