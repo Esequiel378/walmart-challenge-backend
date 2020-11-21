@@ -1,5 +1,8 @@
 version: '3'
 
+volumes:
+  mongodb_local: {}
+
 services:
   api:
     build:
@@ -7,10 +10,35 @@ services:
       dockerfile: ./compose/local/api/Dockerfile
     container_name: api
     command: /start
-    env_file: ./.envs/.local/.api
+    env_file: .env
     volumes:
       - ./app:/app
     ports:
-      - "80:80"
+      - "3000:3000"
 
+  database:
+    build:
+      context: .
+      dockerfile: ./compose/local/database/Dockerfile
+    container_name: database
+    env_file: .env
+    environment:
+      - MONGO_INITDB_DATABASE=${DATABASE_NAME}
+      - MONGO_INITDB_ROOT_USERNAME=${DATABASE_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${DATABASE_PASSWORD}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_local:/data/db
 
+        # https://stackoverflow.com/questions/48178870/import-data-on-mongodb-using-docker-compose
+        # database_seed:
+        # build:
+        # context: .
+        # dockerfile: ./compose/local/database/Dockerfile
+        # container_name: database-seed
+        # command: /mongo-seed/import.sh
+        # links:
+        # - database
+        # volumes:
+        # - ./compose/local/database/data:/database

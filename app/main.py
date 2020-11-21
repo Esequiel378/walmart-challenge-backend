@@ -1,7 +1,10 @@
-from typing import Optional, List
+import typing as t
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
+from models import Discount, Product
+from database import get_products
 
 app = FastAPI()
 
@@ -15,5 +18,16 @@ app.add_middleware(
 
 
 @app.get("/")
-async def root():
-    return {"message": "Hello World"}
+async def root() -> t.List[Product]:
+    qs = get_products()
+    return list(qs)
+
+
+@app.get("/products")
+async def products() -> t.List[Product]:
+    return []
+
+
+@app.get("/products/{id}")
+async def products(id: int) -> Product:
+    return Product(id=id, brand="breadm", description="asd", image="asd", price=123123)
