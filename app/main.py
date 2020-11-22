@@ -3,8 +3,7 @@ import typing as t
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from models import Discount, Product
-from database import get_products
+from products import ProductAPIRouter
 
 app = FastAPI()
 
@@ -16,18 +15,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-@app.get("/")
-async def root() -> t.List[Product]:
-    qs = get_products()
-    return list(qs)
-
-
-@app.get("/products")
-async def products() -> t.List[Product]:
-    return []
-
-
-@app.get("/products/{id}")
-async def products(id: int) -> Product:
-    return Product(id=id, brand="breadm", description="asd", image="asd", price=123123)
+# routes - api
+app.include_router(ProductAPIRouter, prefix="/api/products")
