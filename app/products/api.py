@@ -5,7 +5,7 @@ from fastapi_utils.inferring_router import InferringRouter
 from .models import Product
 from .connections import DatabaseConnection
 
-import typing as t
+from typing import Optional, List
 
 
 router = InferringRouter()
@@ -17,7 +17,7 @@ class ProductAPI:
     db: DatabaseConnection = Depends(DatabaseConnection)
 
     @router.get("/")
-    async def products(self, search: t.Optional[str] = None) -> t.List[Product]:
+    async def products(self, search: Optional[str] = None) -> List[Product]:
         """List all products"""
 
         return self.db.get_products(search)

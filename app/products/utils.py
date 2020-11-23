@@ -5,17 +5,17 @@ from collections import Counter
 from .models import Product
 
 
-def get_repeted_characters_amount(string: str) -> int:
+def get_repeated_characters_amount(string: str) -> int:
+    """Get amount of repeated characters in a given string"""
 
     string = re.sub(r" ", "", string)
     occurences = Counter(string)
-    repeated_character = 0
+    repeated_characters = 0
 
     for key, value in occurences.items():
-        if value > 1:
-            repeated_character += 1
+        repeated_characters += 1 if value > 1 else 0
 
-    return repeated_character
+    return repeated_characters
 
 
 def set_products_discounts(products: List[Product]) -> List[Product]:

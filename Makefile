@@ -41,7 +41,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr .pytest_cache
 
 lint: ## check style with black
-	black app tests
+	black app
 
 test: ## run tests quickly with the default Python
 	pytest
