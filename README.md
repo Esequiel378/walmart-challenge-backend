@@ -1,10 +1,10 @@
-# Waltmart challengue - API backend
+# Waltmart challenge - API backend
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ## Description
 
-Backend conection for a demo [Lider](https://www.lider.cl/supermercado/) web
+Backend connection for a demo [Lider](https://www.lider.cl/supermercado/) web
 app built with [Docker](https://www.docker.com/why-docker),
 [FastAPI](https://fastapi.tiangolo.com/) and [mongoDB](https://www.mongodb.com/es)
 
