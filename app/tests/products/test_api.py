@@ -33,6 +33,16 @@ class TestProductAPI:
         assert type(product) == dict
         assert product.get("id") == expected_id
 
+    def test_get_unhappy_path(self):
+        expected_id = -1
+
+        response = client.get(f"/api/products/{expected_id}")
+
+        product = json.loads(response.text)
+
+        assert type(product) == dict
+        assert product == {"detail": f"Entry #{expected_id} not found."}
+
     def test_create(self):
 
         product = json.dumps(

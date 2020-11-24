@@ -11,15 +11,16 @@ from products.utils import (
 
 class TestProductUtils:
     @pytest.mark.parametrize(
-        "description,expected", [
-           ("Coche Travel System Tesla", 5),
-           ("Microondas 120W"", 1),
-           ("Cargador Smart Phone USB", 4),
-        ]
+        "description,expected",
+        [
+            ("Coche Travel System Tesla", 5),
+            ("Microondas 120W", 1),
+            ("Cargador Smart Phone USB", 4),
+        ],
     )
     def test_repeated_characters_amount(self, description, expected):
 
-        repeated_character = get_repeated_characters_amount(test_description)
+        repeated_character = get_repeated_characters_amount(description)
 
         assert expected == repeated_character
 
