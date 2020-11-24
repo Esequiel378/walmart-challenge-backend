@@ -1,19 +1,16 @@
 version: '3'
 
 volumes:
-  mongodb_local: {}
+  mongodb_production: {}
 
 services:
   api:
     build:
       context: .
       dockerfile: ./compose/api/Dockerfile
-      target: local
+      target: production
     container_name: api
-    command: /start
     env_file: .env
-    volumes:
-      - ./app:/app
     ports:
       - "5000:5000"
     depends_on:
@@ -30,15 +27,15 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - mongodb_local:/data/db
+      - mongodb_production:/data/db
 
   mongo-seed:
     build:
       context: .
       dockerfile: ./compose/database/Dockerfile
-      target: local
+      target: production
     container_name: mongo-seed
     env_file: .env
-    command: /mongo-seed/import.sh
     depends_on:
       - database
+
