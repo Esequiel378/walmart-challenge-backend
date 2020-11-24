@@ -20,9 +20,7 @@ services:
       - database
 
   database:
-    build:
-      context: .
-      dockerfile: ./compose/database/Dockerfile
+    image: mongo:3.6.8
     container_name: database
     env_file: .env
     environment:
@@ -33,3 +31,13 @@ services:
       - "27017:27017"
     volumes:
       - mongodb_local:/data/db
+
+  mongo-seed:
+    build:
+      context: .
+      dockerfile: ./compose/database/Dockerfile
+    container_name: mongo-seed
+    env_file: .env
+    command: /mongo-seed/import.sh
+    depends_on:
+      - database
