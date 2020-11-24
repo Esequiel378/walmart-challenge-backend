@@ -13,6 +13,7 @@ RUN chmod +x /start
 
 WORKDIR /app
 
+
 FROM tiangolo/uvicorn-gunicorn-fastapi:python3.7 as production
 
 ENV PYTHONUNBUFFERED 1
