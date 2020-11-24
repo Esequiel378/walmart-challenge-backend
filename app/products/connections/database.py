@@ -7,33 +7,38 @@ from products.models import Product
 
 from .exceptions import EntryDoesNotExist
 
-
-class DatabaseConnection:
+class ProductsDatabaseConnection:
     def __init__(self, db=Depends(get_database)):
         self.collection = db["products"]
 
         # create index to perfom search
-        self.collection.create_index(
-            [("brand", "text"), ("description", "text")],
-        )
+        self.collection.create_index([("brand", "text"), ("description", "text")],)
 
-    def get_products(self, search: Optional[str] = None) -> List[Product]:
+    def list(self) -> List[Product]:
         """query all products in database and return a list"""
 
-        if not search is None:
-            # qs = self.collection.find(
-            # {"$text": {"$search": search, "$caseSensitive": False}}, {"_id": False},
-            # )
-            qs = self.collection.find(
-                {"description": {"$regex": f".*{search}.*"}}, {"_id": False}
-            )
-
-        else:
-            qs = products_collection.find({}, {"_id": False})
+        qs = self.collection.find({}, {"_id": False})
 
         return list(qs)
 
-    def get_product(self, id: int) -> Product:
+    def search(self, query: str) -> List[Product]:
+        """Search products by brand or description"""
+
+        print(query)
+
+        qs = self.collection.find(
+            {
+                "$or": [
+                    {"brand": {"$regex": query, "$options": "i"}},
+                    {"description": {"$regex": query, "$options": "i"}},
+                ]
+            },
+            {"_id": False},
+        )
+
+        return list(qs)
+
+    def get(self, id: int) -> Product:
         """get a product from a given id"""
 
         post = self.collection.find_one({"id": id}, {"_id": False})
@@ -43,7 +48,14 @@ class DatabaseConnection:
 
         return post
 
-    def add_product(self, product: Product):
+    def create(self, product: Product):
         """Add a given product to database"""
 
         self.collection.insert_one(product.dict())
+
+    def bulk_create(self, products: List[Product]):
+        """Add a given list of products to database"""
+
+        entries = [product.__dict__ for product in products]
+
+        self.collection.insert_many(entries)

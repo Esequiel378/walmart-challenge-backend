@@ -44,10 +44,10 @@ lint: ## check style with black
 	black app
 
 test: ## run tests quickly with the default Python
-	pytest
+	docker-compose -f local.yml run api pytest
 
 coverage: ## check code coverage quickly with the default Python
-	coverage run --source app -m pytest
-	coverage report -m
-	coverage html
-	$(BROWSER) htmlcov/index.html
+	docker-compose -f local.yml run api coverage run -m pytest \
+		&& coverage report -m \
+		&& coverage html \
+		&& $(BROWSER) htmlcov/index.html

@@ -9,4 +9,4 @@ class EntryDoesNotExist(BaseConnectionException):
     """Entry not found error."""
 
     def __init__(self, entry):
-        super().__init__(f"Entry not found {str(entry)}")
+        super().__init__(f"Entry #{str(entry)} not found.")

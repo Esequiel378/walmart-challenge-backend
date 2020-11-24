@@ -7,3 +7,7 @@ class Product(BaseModel):
     description: str
     image: str
     price: int
+
+
+class ProductWithDiscountPromotion(Product):
+    discount: int

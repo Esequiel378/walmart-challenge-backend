@@ -1,11 +1,14 @@
-from fastapi import Depends
-from fastapi_utils.cbv import cbv
-from fastapi_utils.inferring_router import InferringRouter
-
-from .models import Product
-from .connections import DatabaseConnection
-
 from typing import Optional, List
+
+from fastapi import Depends, HTTPException
+from fastapi_utils.inferring_router import InferringRouter
+from fastapi_utils.cbv import cbv
+
+from . import utils
+
+from .connections import ProductsDatabaseConnection
+from .connections.exceptions import EntryDoesNotExist
+from .models import Product, ProductWithDiscountPromotion
 
 
 router = InferringRouter()
@@ -13,25 +16,58 @@ router = InferringRouter()
 
 @cbv(router)
 class ProductAPI:
+    """Products endpoints"""
 
-    db: DatabaseConnection = Depends(DatabaseConnection)
+    db: ProductsDatabaseConnection = Depends(ProductsDatabaseConnection)
 
     @router.get("/")
-    async def products(self, search: Optional[str] = None) -> List[Product]:
+    async def list(self) -> List[ProductWithDiscountPromotion]:
         """List all products"""
 
-        return self.db.get_products(search)
+        products = self.db.list()
+
+        products_with_discounts = utils.get_products_discount_promotion(products)
+
+        return products_with_discounts
+
+    @router.get("/search")
+    async def search(self, query: str) -> List[ProductWithDiscountPromotion]:
+        """Search products by brand or description"""
+
+        products = self.db.search(query)
+
+        products_with_discounts = utils.get_products_discount_promotion(products)
+
+        return products_with_discounts
 
     @router.get("/{id}")
-    async def products(self, id: int) -> Product:
+    async def get(self, id: int) -> ProductWithDiscountPromotion:
         """Get product by id"""
 
-        return self.db.get_product(id)
+        try:
+            product_entry = self.db.get(id)
+        except EntryDoesNotExist as e:
+            raise HTTPException(status_code=404, detail=str(e))
 
-    @router.post("/")
-    async def add_product(self, product: Product):
+        product_with_discount = utils.get_product_discount_promotion(product_entry)
+
+        return product_with_discount
+
+    @router.post("/", status_code=201)
+    async def create(self, product: Product):
         """Create a new product entry"""
 
-        self.db.add_product(product)
+        self.db.create(product)
 
-        return {"message": "success"}
+        return {"message": "succes"}
+
+    @router.post("/bulk/create/", status_code=201)
+    async def bulk_create(
+        self, product: List[Product]
+    ) -> List[ProductWithDiscountPromotion]:
+        """Bulk product creation"""
+
+        self.db.bulk_create(product)
+
+        return {"message": "succes"}
+

@@ -1,1 +1,1 @@
-from .database import DatabaseConnection
+from .database import ProductsDatabaseConnection
