@@ -31,7 +31,7 @@ docker-compose -f local.yml build
 docker-compose -f local.yml up
 ```
 
-Now you can visit http://localhost:5000/api/docs
+Now you can visit http://localhost:5000/docs
 
 ## Testing
 
