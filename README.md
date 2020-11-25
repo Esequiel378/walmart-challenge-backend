@@ -9,7 +9,8 @@ app built with [Docker](https://www.docker.com/why-docker),
 [FastAPI](https://fastapi.tiangolo.com/) and [mongoDB](https://www.mongodb.com/es)
 
 Here you will find a really nice [Web App](https://github.com/Esequiel378/walmart-challenge-frontend)
-to interact with
+to interact with, also a quick [Deployment](https://github.com/Esequiel378/walmart-challenge-deployment)
+solution
 
 Live demo [lider.co](http://165.22.3.102)
 
@@ -62,3 +63,11 @@ Run coverage
 ```shell
 make coverage
 ```
+
+## TODO
+
+- [ ] Implement integration tests
+
+- [ ] Improve database entry search
+
+- [ ] Improve unit tests with 100% coverage goal
