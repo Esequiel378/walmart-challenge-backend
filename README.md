@@ -11,6 +11,19 @@ app built with [Docker](https://www.docker.com/why-docker),
 Here you will find a really nice [Web App](https://github.com/Esequiel378/waltmart-challenge-frontend)
 to interact with
 
+## Setup
+
+This project need a .env file in the root directory, with the next variables
+
+```Python
+DATABASE_HOST=database
+DATABASE_USERNAME=root
+DATABASE_PASSWORD=secret
+
+DATABASE_URI=mongodb://root:secret@database:27017
+DATABASE_NAME=desafio_walmart
+```
+
 ## Deployment
 
 First you need to get the source code
