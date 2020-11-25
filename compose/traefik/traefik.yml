@@ -1,0 +1,38 @@
+log:
+  level: INFO
+  # level: DEBUG
+
+entryPoints:
+  web:
+    # http
+    address: ":80"
+
+http:
+  routers:
+    frontend-router:
+      rule: "PathPrefix(`/`)"
+      entryPoints:
+        - web
+      service: frontend
+      priority: 1
+
+    api-router:
+      # ideally this would be filter by host
+      # somethig like Host(`linder.backend`)
+      rule: "PathPrefix(`/api`, `/docs`, `/openapi`)"
+      entryPoints:
+        - web
+      service: api
+      priority: 2
+
+  services:
+    api:
+      loadBalancer:
+        servers:
+          - url: http://api:5000
+
+providers:
+  # https://docs.traefik.io/master/providers/file/
+  file:
+    filename: /etc/traefik/traefik.yml
+    watch: true

@@ -1,6 +1,7 @@
 version: '3'
 
 volumes:
+  production_traefik: {}
   mongodb_production: {}
 
 services:
@@ -42,3 +43,14 @@ services:
     depends_on:
       - database
 
+  traefik:
+    build:
+      context: .
+      dockerfile: ./compose/traefik/Dockerfile
+    image: production_traefik
+    depends_on:
+      - api
+    volumes:
+      - production_traefik:/etc/traefik/acme
+    ports:
+      - "80:80"

@@ -45,8 +45,20 @@ docker-compose -f local.yml build
 docker-compose -f local.yml up
 ```
 
-Now you can visit http://localhost:5000 or
-http://localhost:5000/docs to view de api documentation
+Now you can visit http://localhost:5000/docs to view de api documentation
+
+Or if your in a production environment run
+
+```shell
+# build api and database images
+docker-compose -f production.yml build
+
+# create api and database containers
+docker-compose -f production.yml up
+```
+
+Now you can visit http://{your-server-domain-or-ip}/docs or
+http://localhost/docs to view de api documentation
 
 ## Testing
 
