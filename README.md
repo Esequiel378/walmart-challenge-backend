@@ -66,7 +66,7 @@ make coverage
 
 + Lider demo frontend https://github.com/Esequiel378/walmart-challenge-frontend
 
-+ Diployment solution https://github.com/Esequiel378/walmart-challenge-deployment
++ Deployment solution https://github.com/Esequiel378/walmart-challenge-deployment
 
 ## TODO
 
