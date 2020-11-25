@@ -6,7 +6,8 @@
 
 Backend connection for a demo [Lider](https://www.lider.cl/supermercado/) web
 app built with [Docker](https://www.docker.com/why-docker),
-[FastAPI](https://fastapi.tiangolo.com/) and [mongoDB](https://www.mongodb.com/es)
+[FastAPI](https://fastapi.tiangolo.com/), [mongoDB](https://www.mongodb.com/es)
+and [Traefik](https://doc.traefik.io/traefik/) as reverse proxy
 
 Here you will find a really nice [Web App](https://github.com/Esequiel378/walmart-challenge-frontend)
 to interact with, also a quick [Deployment](https://github.com/Esequiel378/walmart-challenge-deployment)
