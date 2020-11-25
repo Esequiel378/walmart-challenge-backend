@@ -31,5 +31,4 @@ COPY ./app /app
 
 WORKDIR /app
 
-ENTRYPOINT ["/start"]
-
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "5000"]
