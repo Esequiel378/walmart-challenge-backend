@@ -11,6 +11,8 @@ app built with [Docker](https://www.docker.com/why-docker),
 Here you will find a really nice [Web App](https://github.com/Esequiel378/walmart-challenge-frontend)
 to interact with
 
+Live demo [http://165.22.3.102/docs](http://165.22.3.102/docs)
+
 ## Setup
 
 This project need a .env file in the root directory, with the next variables
