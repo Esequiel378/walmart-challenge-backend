@@ -58,8 +58,8 @@ docker-compose -f production.yml build
 docker-compose -f production.yml up
 ```
 
-Now you can visit http://{your-server-domain-or-ip}/docs or
-http://localhost/docs to view de api documentation
+Now you can visit your server ip/domain at the ```/docs``` endpoint
+or http://localhost/docs to view de api documentation
 
 ## Testing
 
