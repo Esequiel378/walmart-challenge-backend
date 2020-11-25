@@ -11,7 +11,7 @@ app built with [Docker](https://www.docker.com/why-docker),
 Here you will find a really nice [Web App](https://github.com/Esequiel378/walmart-challenge-frontend)
 to interact with
 
-Live demo [http://165.22.3.102/docs](http://165.22.3.102/docs)
+Live demo [lider.co](http://165.22.3.102)
 
 ## Setup
 
@@ -46,7 +46,8 @@ docker-compose -f local.yml build
 docker-compose -f local.yml up
 ```
 
-Now you can visit http://localhost:5000/docs
+Now you can visit http://localhost:5000 or
+http://localhost:5000/docs to view de api documentation
 
 ## Testing
 
