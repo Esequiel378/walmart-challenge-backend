@@ -40,9 +40,7 @@ Since the project use docker-compose, you can deploy locally by running
 ```shell
 # build api and database images
 docker-compose -f local.yml build
-```
 
-```shell
 # create api and database containers
 docker-compose -f local.yml up
 ```
@@ -63,6 +61,12 @@ Run coverage
 ```shell
 make coverage
 ```
+
+## Related Projects
+
++ Lider demo frontend https://github.com/Esequiel378/walmart-challenge-frontend
+
++ Diployment solution https://github.com/Esequiel378/walmart-challenge-deployment
 
 ## TODO
 
