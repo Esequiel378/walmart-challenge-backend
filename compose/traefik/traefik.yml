@@ -9,12 +9,6 @@ entryPoints:
 
 http:
   routers:
-    frontend-router:
-      rule: "PathPrefix(`/`)"
-      entryPoints:
-        - web
-      service: frontend
-      priority: 1
 
     api-router:
       # ideally this would be filter by host
